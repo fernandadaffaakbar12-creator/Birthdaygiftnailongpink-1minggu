@@ -1,4 +1,4 @@
-﻿// ==========================================
+// ==========================================
 // 0. ANIMASI LOADING "I LOVE YOU" MEMBENTUK HATI
 // ==========================================
 (function () {
@@ -245,7 +245,7 @@
         const pinPopupClose = document.getElementById('pin-popup-close');
 
         // DEFAULT PIN: Silakan ubah angka ini jika ingin PIN lain
-        const SECRET_PIN = "1009";
+        const SECRET_PIN = "031426";
 
         let pinAttempt = 0;
         let popupTimeout = null;
@@ -351,13 +351,13 @@
 
         if (pinInput) {
             pinInput.addEventListener('input', function () {
-                if (pinInput.value.length === 4) {
+                if (pinInput.value.length === SECRET_PIN.length) {
                     // Delay sedikit agar digit terakhir terasa diketik
                     setTimeout(() => {
                         if (pinInput.value === SECRET_PIN) {
                             // PIN BENAR
                             showPinPopup({
-                                message: 'Valid!\nLanjut yaa~',
+                                message: 'Valid!\nLanjut yaa sayang~',
                                 buttonText: 'Lanjut 💕'
                             }, true);
 
@@ -514,20 +514,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 else if (this.classList.contains('planet-card')) {
                     modalImg.src = this.querySelector('img').src;
                     modalImg.style.aspectRatio = "3 / 4";
+                    modalImg.style.width = "min(85vw, 56.25vh)";
+                    modalImg.style.height = "auto";
+                    modalImg.style.objectFit = "cover";
 
                     const customCaption = this.getAttribute('data-caption');
                     const teksCaption = customCaption ? customCaption : this.querySelector('.planet-caption').innerText;
                     if (modalCaption) modalCaption.innerText = teksCaption;
                 }
                 // C. JIKA YANG DIKLIK ADALAH POLAROID
-                else if (this.classList.contains('polaroid')) {
-                    modalImg.src = this.querySelector('img').src;
-                    modalImg.style.aspectRatio = "1 / 1";
+                else if (this.classList.contains('polaroid') || this.closest('.polaroid')) {
+                    const card = this.classList.contains('polaroid') ? this : this.closest('.polaroid');
+                    const img = card.querySelector('img');
+                    if (img) modalImg.src = img.src;
+                    modalImg.style.aspectRatio = "3 / 4";
+                    modalImg.style.width = "min(85vw, 56.25vh)";
+                    modalImg.style.height = "auto";
+                    modalImg.style.objectFit = "cover";
+
+                    const customCaption = card.getAttribute('data-caption');
+                    const capEl = card.querySelector('.caption');
+                    const teksCaption = customCaption ? customCaption : (capEl ? capEl.innerText : "");
+                    if (modalCaption) modalCaption.innerText = teksCaption;
                 }
                 // D. JIKA YANG DIKLIK ADALAH GALERI CINTA
                 else {
                     modalImg.src = this.src;
                     modalImg.style.aspectRatio = "9 / 16";
+                    modalImg.style.width = "min(85vw, 42.18vh)";
+                    modalImg.style.height = "auto";
+                    modalImg.style.objectFit = "cover";
                 }
 
                 modal.classList.add('show-modal');
