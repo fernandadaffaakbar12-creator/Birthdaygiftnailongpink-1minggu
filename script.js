@@ -245,7 +245,7 @@
         const pinPopupClose = document.getElementById('pin-popup-close');
 
         // DEFAULT PIN: Silakan ubah angka ini jika ingin PIN lain
-        const SECRET_PIN = "031426";
+        const SECRET_PIN = "080910";
 
         let pinAttempt = 0;
         let popupTimeout = null;
@@ -474,6 +474,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById('image-modal');
     const modalImg = document.getElementById('modal-img');
     const modalIframe = document.getElementById('modal-iframe'); // Panggil elemen iframe
+    const modalVideo = document.getElementById('modal-video'); // Panggil elemen video jika file mp4
     const modalCaption = document.getElementById('modal-caption');
 
     if (daftarFoto.length > 0 && modal && modalImg) {
@@ -483,27 +484,46 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Reset layar setiap kali diklik
                 if (modalCaption) modalCaption.innerText = "";
                 modalImg.style.display = 'block'; // Tampilkan foto sebagai default
-                modalIframe.style.display = 'none'; // Sembunyikan musik sebagai default
-                modalIframe.src = ""; // Kosongkan lagu sebelumnya
+                modalIframe.style.display = 'none'; // Sembunyikan musik/video iframe sebagai default
+                modalIframe.src = ""; // Kosongkan link sebelumnya
+                if (modalVideo) {
+                    modalVideo.pause();
+                    modalVideo.style.display = 'none';
+                    modalVideo.src = "";
+                }
 
-                // A. JIKA YANG DIKLIK ADALAH KARTU LAGU/VIDEO (Punya data-embed)
+                // A. JIKA YANG DIKLIK ADALAH KARTU LAGU/VIDEO/ANIME (Punya data-embed)
                 if (this.classList.contains('planet-card') && this.hasAttribute('data-embed')) {
-                    modalImg.style.display = 'none'; // Sembunyikan foto
-                    modalIframe.style.display = 'block'; // Tampilkan alat musik/video
+                    let embedUrl = this.getAttribute('data-embed');
+                    if (embedUrl.startsWith('//')) {
+                        embedUrl = 'https:' + embedUrl;
+                    }
+                    const isDirectVideo = /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(embedUrl);
 
-                    const embedUrl = this.getAttribute('data-embed');
-                    modalIframe.src = embedUrl; // Masukkan link
+                    if (isDirectVideo && modalVideo) {
+                        modalImg.style.display = 'none';
+                        modalVideo.style.display = 'block';
+                        modalVideo.src = embedUrl;
+                        modalVideo.play().catch(() => { });
+                    } else {
+                        modalImg.style.display = 'none'; // Sembunyikan foto
+                        modalIframe.style.display = 'block'; // Tampilkan player video/musik
+                        modalIframe.src = embedUrl; // Masukkan link
 
-                    // Hapus class lama
-                    modalIframe.classList.remove('iframe-spotify', 'iframe-youtube', 'iframe-facebook');
+                        // Hapus class lama
+                        modalIframe.classList.remove('iframe-spotify', 'iframe-youtube', 'iframe-facebook', 'iframe-video');
 
-                    // Deteksi platform untuk penyesuaian rasio (16:9 untuk YouTube, Kotak untuk Spotify, 9:16 untuk Facebook)
-                    if (embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be')) {
-                        modalIframe.classList.add('iframe-youtube');
-                    } else if (embedUrl.includes('spotify.com')) {
-                        modalIframe.classList.add('iframe-spotify');
-                    } else if (embedUrl.includes('facebook.com')) {
-                        modalIframe.classList.add('iframe-facebook');
+                        // Deteksi platform untuk penyesuaian rasio (16:9 untuk YouTube, Bilibili, Anime player; Kotak untuk Spotify; 9:16 untuk Facebook)
+                        if (embedUrl.includes('spotify.com')) {
+                            modalIframe.classList.add('iframe-spotify');
+                        } else if (embedUrl.includes('facebook.com')) {
+                            modalIframe.classList.add('iframe-facebook');
+                        } else if (embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be')) {
+                            modalIframe.classList.add('iframe-youtube');
+                        } else {
+                            // Bilibili, player streaming anime, Google Drive preview, dll.
+                            modalIframe.classList.add('iframe-video');
+                        }
                     }
 
                     const customCaption = this.getAttribute('data-caption');
@@ -562,12 +582,17 @@ document.addEventListener("DOMContentLoaded", function () {
 function tutupModal() {
     const modal = document.getElementById('image-modal');
     const modalIframe = document.getElementById('modal-iframe');
+    const modalVideo = document.getElementById('modal-video');
 
     if (modal) {
         modal.classList.remove('show-modal');
-        // KUNCI PENTING: Mengosongkan src agar lagu berhenti berputar saat ditutup
+        // KUNCI PENTING: Mengosongkan src agar lagu/video berhenti berputar saat ditutup
         if (modalIframe) {
             modalIframe.src = "";
+        }
+        if (modalVideo) {
+            modalVideo.pause();
+            modalVideo.src = "";
         }
     }
 }

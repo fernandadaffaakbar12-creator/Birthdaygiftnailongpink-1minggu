@@ -974,12 +974,31 @@ body {
     height: 152px;
 }
 
-/* Rasio khusus untuk YouTube (16:9 Landscape) */
-#modal-iframe.iframe-youtube {
+/* Rasio khusus untuk Video Anime / YouTube / Bilibili / Player Streaming (16:9 Landscape) */
+#modal-iframe.iframe-youtube,
+#modal-iframe.iframe-video {
     width: 90vw;
-    max-width: 650px;
+    max-width: 720px;
     aspect-ratio: 16 / 9;
     height: auto; /* Tinggi otomatis menyesuaikan aspect ratio */
+    border: 2px solid rgba(255, 105, 180, 0.4);
+    background: #000;
+}
+
+/* Pemutar video langsung (MP4/WebM) */
+#modal-video {
+    display: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 50px rgba(255, 105, 180, 0.5);
+    width: 90vw;
+    max-width: 720px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 2px solid rgba(255, 105, 180, 0.4);
+    background: #000;
+    outline: none;
+    transform: scale(0.7);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Rasio khusus untuk Facebook (9:16 Portrait untuk Reels) */
@@ -989,7 +1008,8 @@ body {
     max-height: 80vh;
 }
 
-#image-modal.show-modal #modal-iframe {
+#image-modal.show-modal #modal-iframe,
+#image-modal.show-modal #modal-video {
     transform: scale(1);
 }
 
