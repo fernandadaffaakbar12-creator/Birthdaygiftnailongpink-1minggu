@@ -900,26 +900,23 @@ body {
     text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
 }
 
-/* Jarak Orbit DIPERBESAR (TranslateZ) agar kartu tidak berdempetan */
+/* Jarak Orbit 4 kartu (berdekatan namun tidak terlalu rapat) */
 .item1 {
-    transform: rotateY(0deg) translateZ(340px);
+    transform: rotateY(0deg) translateZ(190px);
 }
 
 .item2 {
-    transform: rotateY(72deg) translateZ(340px);
+    transform: rotateY(90deg) translateZ(190px);
 }
 
 .item3 {
-    transform: rotateY(144deg) translateZ(340px);
+    transform: rotateY(180deg) translateZ(190px);
 }
 
 .item4 {
-    transform: rotateY(216deg) translateZ(340px);
+    transform: rotateY(270deg) translateZ(190px);
 }
 
-.item5 {
-    transform: rotateY(288deg) translateZ(340px);
-}
 
 /* =========================================
    DESAIN LAYAR FOTO MEMBESAR (LIGHTBOX)
@@ -956,6 +953,17 @@ body {
     box-shadow: 0 10px 50px rgba(255, 105, 180, 0.5);
     transform: scale(0.7);
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Rasio aspek foto polaroid saat diperbesar (3:4) */
+#modal-img.polaroid-img-modal {
+    aspect-ratio: 3 / 4 !important;
+    width: min(85vw, 56.25vh) !important;
+    height: auto !important;
+    max-height: 75vh !important;
+    max-width: 85vw !important;
+    object-fit: cover !important;
+    object-position: center !important;
 }
 
 /* Desain dasar iframe (akan diubah rasionya via JS) */
@@ -1464,26 +1472,23 @@ body {
         font-size: 0.95rem;
     }
 
-    /* Menyesuaikan jarak orbit di HP */
+    /* Menyesuaikan jarak orbit 4 kartu di HP */
     .item1 {
-        transform: rotateY(0deg) translateZ(200px);
+        transform: rotateY(0deg) translateZ(150px);
     }
 
     .item2 {
-        transform: rotateY(72deg) translateZ(200px);
+        transform: rotateY(90deg) translateZ(150px);
     }
 
     .item3 {
-        transform: rotateY(144deg) translateZ(200px);
+        transform: rotateY(180deg) translateZ(150px);
     }
 
     .item4 {
-        transform: rotateY(216deg) translateZ(200px);
+        transform: rotateY(270deg) translateZ(150px);
     }
 
-    .item5 {
-        transform: rotateY(288deg) translateZ(200px);
-    }
 
     #main-content {
         padding: 30px 15px;
@@ -1939,13 +1944,13 @@ body {
     padding: 14px 36px;
     font-family: 'Caveat', cursive;
     font-size: 1.5rem;
-    color: #5a0022;
-    background: linear-gradient(135deg, #fdd835, #ff1493, #f57f17);
-    border: 2px solid rgba(255, 105, 180, 0.4);
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff85a2, #ff1493, #ff69b4);
+    border: 2px solid rgba(255, 255, 255, 0.7);
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s ease;
-    box-shadow: 0 4px 20px rgba(253, 216, 53, 0.4), 0 0 30px rgba(253, 216, 53, 0.15);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.45), 0 0 30px rgba(255, 255, 255, 0.25);
     animation: candleBtnPulse 2.5s ease-in-out infinite;
     position: relative;
     overflow: hidden;
@@ -1958,19 +1963,19 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
     transform: rotate(45deg);
     animation: shimmerBtn 3s ease-in-out infinite;
 }
 
 .btn-tiup-lilin:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 30px rgba(253, 216, 53, 0.6), 0 0 50px rgba(253, 216, 53, 0.25);
+    box-shadow: 0 8px 30px rgba(255, 20, 147, 0.6), 0 0 50px rgba(255, 105, 180, 0.4);
 }
 
 @keyframes candleBtnPulse {
-    0%, 100% { box-shadow: 0 4px 20px rgba(253, 216, 53, 0.4), 0 0 30px rgba(253, 216, 53, 0.15); }
-    50% { box-shadow: 0 4px 30px rgba(253, 216, 53, 0.6), 0 0 50px rgba(253, 216, 53, 0.3); }
+    0%, 100% { box-shadow: 0 4px 20px rgba(255, 105, 180, 0.45), 0 0 30px rgba(255, 255, 255, 0.25); }
+    50% { box-shadow: 0 4px 30px rgba(255, 20, 147, 0.65), 0 0 50px rgba(255, 105, 180, 0.45); }
 }
 
 @keyframes shimmerBtn {
@@ -2079,8 +2084,8 @@ body {
 .candle-message {
     font-family: 'Caveat', cursive;
     font-size: 1.6rem;
-    color: #fdd835;
-    text-shadow: 0 0 15px rgba(253, 216, 53, 0.5);
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 105, 180, 0.9), 0 0 30px rgba(255, 20, 147, 0.5);
     margin-bottom: 30px;
     min-height: 60px;
     opacity: 0;
@@ -2317,47 +2322,68 @@ body {
     100% { opacity: 0; transform: translateX(-50%) translateY(-30px); }
 }
 
-/* KUE */
+/* KUE (Tema Pink & White) */
 .cake {
     position: relative;
     width: 200px;
 }
 
-/* Kue bertema kuning */
+/* Lapisan Atas - Whipped Cream Putih Bersih dengan Kilau Lembut */
 .cake-top {
     width: 200px;
-    height: 18px;
-    background: linear-gradient(180deg, #fdd835, #ff1493);
-    border-radius: 8px 8px 0 0;
+    height: 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #fff0f5 70%, #ffd1dc 100%);
+    border-radius: 12px 12px 0 0;
     position: relative;
     z-index: 1;
-    box-shadow: 0 -2px 8px rgba(253, 216, 53, 0.3);
+    box-shadow: 0 -3px 12px rgba(255, 182, 193, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+    border-left: 2px solid rgba(255, 255, 255, 0.8);
+    border-right: 2px solid rgba(255, 182, 193, 0.4);
 }
 
+/* Lapisan Tengah - Strawberry Sponge Lembut Berisi Krim Putih */
 .cake-middle {
     width: 200px;
     height: 55px;
-    background: linear-gradient(180deg, #fff0f5, #ffd1dc);
+    background: linear-gradient(
+        180deg,
+        #ffd1dc 0%,
+        #ffb6c1 34%,
+        #ffffff 37%,
+        #ffffff 63%,
+        #ffb6c1 66%,
+        #ffa4b6 100%
+    );
     position: relative;
-    border-left: 3px solid rgba(255,255,255,0.1);
-    border-right: 3px solid rgba(0,0,0,0.05);
+    border-left: 3px solid rgba(255, 255, 255, 0.7);
+    border-right: 3px solid rgba(255, 105, 180, 0.3);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
+/* Lapisan Bawah - Tier Merah Muda & Krim Putih Elegan */
 .cake-bottom {
     width: 200px;
     height: 55px;
-    background: linear-gradient(180deg, #fdd835, #ff1493);
-    border-radius: 0 0 8px 8px;
+    background: linear-gradient(
+        180deg,
+        #ff85a2 0%,
+        #ff69b4 34%,
+        #ffffff 37%,
+        #ffffff 63%,
+        #ff69b4 66%,
+        #e05290 100%
+    );
+    border-radius: 0 0 10px 10px;
     position: relative;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    border-left: 3px solid rgba(255,255,255,0.1);
-    border-right: 3px solid rgba(0,0,0,0.05);
+    box-shadow: 0 8px 25px rgba(255, 20, 147, 0.35), 0 4px 10px rgba(0, 0, 0, 0.25);
+    border-left: 3px solid rgba(255, 255, 255, 0.7);
+    border-right: 3px solid rgba(200, 50, 100, 0.3);
 }
 
-/* Frosting drips */
+/* Frosting drips - Lelehan Krim Putih & Strawberry Pink */
 .cake-frosting {
     position: absolute;
-    top: 15px;
+    top: 16px;
     left: 0;
     width: 100%;
     display: flex;
@@ -2369,13 +2395,16 @@ body {
     display: block;
     width: 16px;
     height: 22px;
-    background: linear-gradient(180deg, #ffb6c1, #fdd835);
+    background: linear-gradient(180deg, #ffffff 0%, #fff5f8 55%, #ffd1dc 100%);
     border-radius: 0 0 50% 50%;
+    box-shadow: 0 3px 6px rgba(255, 105, 180, 0.3);
     animation: frostDrip 3s ease-in-out infinite alternate;
 }
 
 .cake-frosting span:nth-child(even) {
     height: 28px;
+    background: linear-gradient(180deg, #ffffff 0%, #ffd1dc 45%, #ff9ecf 100%);
+    box-shadow: 0 4px 8px rgba(255, 20, 147, 0.25);
     animation-delay: 0.5s;
 }
 
@@ -2384,7 +2413,7 @@ body {
     100% { transform: scaleY(1.15); }
 }
 
-/* Dekorasi */
+/* Dekorasi Bunga & Kilauan Icing */
 .cake-decoration {
     position: absolute;
     bottom: 60px;
@@ -2393,20 +2422,28 @@ body {
     display: flex;
     justify-content: space-around;
     padding: 0 10px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
-/* Glow di sekitar kue */
+.cake-decoration span {
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 8px rgba(255, 105, 180, 0.7));
+    transform: scale(1.1);
+    display: inline-block;
+}
+
+/* Piring Kue Putih Mewah dengan Pancaran Cahaya Pink */
 .cake-container::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 250px;
-    height: 60px;
-    background: radial-gradient(ellipse, rgba(253, 216, 53, 0.2), transparent 70%);
+    width: 260px;
+    height: 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #fff0f5 50%, #fce4ec 100%);
     border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.45), 0 2px 10px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.9);
     z-index: 0;
 }
 
@@ -2419,19 +2456,19 @@ body {
     padding: 14px 36px;
     font-family: 'Caveat', cursive;
     font-size: 1.4rem;
-    color: #fff;
-    background: linear-gradient(135deg, #fdd835, #ff1493, #f57f17);
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff85a2, #ff1493, #ff69b4);
+    border: 2px solid rgba(255, 255, 255, 0.8);
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s ease;
-    box-shadow: 0 4px 20px rgba(253, 216, 53, 0.4);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
     animation: tiupBtnGlow 2s ease-in-out infinite;
 }
 
 .btn-mulai-tiup:hover {
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 30px rgba(253, 216, 53, 0.6);
+    box-shadow: 0 8px 30px rgba(255, 20, 147, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
 }
 
 .btn-mulai-tiup.hidden-btn {
@@ -2442,8 +2479,8 @@ body {
 }
 
 @keyframes tiupBtnGlow {
-    0%, 100% { box-shadow: 0 4px 20px rgba(253, 216, 53, 0.4); }
-    50% { box-shadow: 0 4px 30px rgba(253, 216, 53, 0.7), 0 0 40px rgba(249, 168, 37, 0.2); }
+    0%, 100% { box-shadow: 0 4px 20px rgba(255, 105, 180, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); }
+    50% { box-shadow: 0 6px 30px rgba(255, 20, 147, 0.7), 0 0 35px rgba(255, 182, 193, 0.5); }
 }
 
 /* =========================================
@@ -2562,7 +2599,7 @@ body {
 .candle-message.final-msg {
     font-size: 1.3rem;
     color: #ffffff;
-    text-shadow: 0 0 20px rgba(253, 216, 53, 0.6), 0 0 40px rgba(253, 216, 53, 0.3);
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 20, 147, 0.5);
     max-width: 320px;
     line-height: 1.6;
 }
@@ -2597,21 +2634,22 @@ body {
     font-family: 'Outfit', sans-serif;
     font-size: 0.9rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(253, 216, 53, 0.15);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(253, 216, 53, 0.3);
+    border: 1px solid rgba(255, 182, 193, 0.5);
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .btn-back-candle:hover {
-    background: rgba(253, 216, 53, 0.25);
+    background: rgba(255, 255, 255, 0.3);
     color: #fff;
     transform: translateX(-50%) scale(1.05);
-    border-color: rgba(253, 216, 53, 0.5);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
 }
 
 /* =========================================
@@ -2620,7 +2658,7 @@ body {
 .tap-hint {
     font-family: 'Outfit', sans-serif;
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     margin-top: 15px;
     margin-bottom: 60px;
     min-height: 20px;
@@ -2644,7 +2682,7 @@ body {
 .hold-progress-bar {
     width: 200px;
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 3px;
     margin-top: 20px;
     overflow: hidden;
@@ -2659,10 +2697,10 @@ body {
 .hold-progress-fill {
     width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #fdd835, #ff1493, #f57f17);
+    background: linear-gradient(90deg, #ffffff, #ff69b4, #ff1493);
     border-radius: 3px;
     transition: width 0.05s linear;
-    box-shadow: 0 0 8px rgba(253, 216, 53, 0.6);
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
 }
 
 /* Visual feedback saat menekan kue */

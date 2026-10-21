@@ -245,7 +245,7 @@
         const pinPopupClose = document.getElementById('pin-popup-close');
 
         // DEFAULT PIN: Silakan ubah angka ini jika ingin PIN lain
-        const SECRET_PIN = "080910";
+        const SECRET_PIN = "1022";
 
         let pinAttempt = 0;
         let popupTimeout = null;
@@ -483,6 +483,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Reset layar setiap kali diklik
                 if (modalCaption) modalCaption.innerText = "";
+                modalImg.className = ""; // Reset class foto modal
                 modalImg.style.display = 'block'; // Tampilkan foto sebagai default
                 modalIframe.style.display = 'none'; // Sembunyikan musik/video iframe sebagai default
                 modalIframe.src = ""; // Kosongkan link sebelumnya
@@ -533,10 +534,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 // B. JIKA YANG DIKLIK ADALAH KARTU 3D BIASA (Bukan Lagu)
                 else if (this.classList.contains('planet-card')) {
                     modalImg.src = this.querySelector('img').src;
+                    modalImg.className = 'polaroid-img-modal';
                     modalImg.style.aspectRatio = "3 / 4";
                     modalImg.style.width = "min(85vw, 56.25vh)";
                     modalImg.style.height = "auto";
                     modalImg.style.objectFit = "cover";
+                    modalImg.style.objectPosition = "center";
 
                     const customCaption = this.getAttribute('data-caption');
                     const teksCaption = customCaption ? customCaption : this.querySelector('.planet-caption').innerText;
@@ -547,10 +550,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     const card = this.classList.contains('polaroid') ? this : this.closest('.polaroid');
                     const img = card.querySelector('img');
                     if (img) modalImg.src = img.src;
+                    modalImg.className = 'polaroid-img-modal';
                     modalImg.style.aspectRatio = "3 / 4";
                     modalImg.style.width = "min(85vw, 56.25vh)";
                     modalImg.style.height = "auto";
                     modalImg.style.objectFit = "cover";
+                    modalImg.style.objectPosition = "center";
 
                     const customCaption = card.getAttribute('data-caption');
                     const capEl = card.querySelector('.caption');
@@ -564,6 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     modalImg.style.width = "min(85vw, 42.18vh)";
                     modalImg.style.height = "auto";
                     modalImg.style.objectFit = "cover";
+                    modalImg.style.objectPosition = "center";
                 }
 
                 modal.classList.add('show-modal');
