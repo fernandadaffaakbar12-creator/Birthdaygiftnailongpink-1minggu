@@ -900,21 +900,25 @@ body {
     text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
 }
 
-/* Jarak Orbit 4 kartu (berdekatan namun tidak terlalu rapat) */
+/* Jarak Orbit 5 kartu (berdekatan namun tidak terlalu rapat) */
 .item1 {
-    transform: rotateY(0deg) translateZ(190px);
+    transform: rotateY(0deg) translateZ(230px);
 }
 
 .item2 {
-    transform: rotateY(90deg) translateZ(190px);
+    transform: rotateY(72deg) translateZ(230px);
 }
 
 .item3 {
-    transform: rotateY(180deg) translateZ(190px);
+    transform: rotateY(144deg) translateZ(230px);
 }
 
 .item4 {
-    transform: rotateY(270deg) translateZ(190px);
+    transform: rotateY(216deg) translateZ(230px);
+}
+
+.item5 {
+    transform: rotateY(288deg) translateZ(230px);
 }
 
 
@@ -1190,8 +1194,8 @@ body {
 ========================================= */
 .polaroid-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* Membuat susunan 2 ke samping */
+    grid-template-columns: repeat(4, 1fr);
+    /* 2 kolom efektif (masing-masing kartu span 2), agar kartu ke-5 bisa tepat di tengah */
     gap: 20px;
     margin: 20px auto 0 auto;
     /* Memastikan posisinya tepat di tengah */
@@ -1200,6 +1204,7 @@ body {
 }
 
 .polaroid {
+    grid-column: span 2;
     background: #ffffff;
     padding: 10px 10px 16px 10px;
     border-radius: 8px;
@@ -1214,6 +1219,10 @@ body {
 .polaroid:nth-child(even) {
     transform: rotate(3deg);
     animation: float-polaroid-alt 6s ease-in-out infinite;
+}
+
+.polaroid:last-child:nth-child(odd) {
+    grid-column: 2 / span 2;
 }
 
 .polaroid img {
@@ -1472,21 +1481,25 @@ body {
         font-size: 0.95rem;
     }
 
-    /* Menyesuaikan jarak orbit 4 kartu di HP */
+    /* Menyesuaikan jarak orbit 5 kartu di HP */
     .item1 {
-        transform: rotateY(0deg) translateZ(150px);
+        transform: rotateY(0deg) translateZ(180px);
     }
 
     .item2 {
-        transform: rotateY(90deg) translateZ(150px);
+        transform: rotateY(72deg) translateZ(180px);
     }
 
     .item3 {
-        transform: rotateY(180deg) translateZ(150px);
+        transform: rotateY(144deg) translateZ(180px);
     }
 
     .item4 {
-        transform: rotateY(270deg) translateZ(150px);
+        transform: rotateY(216deg) translateZ(180px);
+    }
+
+    .item5 {
+        transform: rotateY(288deg) translateZ(180px);
     }
 
 
@@ -1518,8 +1531,8 @@ body {
     }
 
     .polaroid-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* Memaksa agar tetap 2 ke samping di HP */
+        grid-template-columns: repeat(4, 1fr);
+        /* Memaksa agar tetap 2 ke samping di HP dengan kartu ke-5 di tengah */
         gap: 10px;
         /* Jarak antar foto sedikit dirapatkan */
     }
